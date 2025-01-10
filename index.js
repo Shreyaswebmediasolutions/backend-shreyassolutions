@@ -76,7 +76,7 @@ app.use("/api/user", userRoute); // User-specific routes
 app.use("/api/admin", adminRoute); // Admin-specific routes
 
 app.get("/server", (req, res) => {
-  res.status(200).json({ status: "Server is running" });
+  res.status(200).json({ message: "Server is running" });
 });
 
 // Fallback route for undefined endpoints
