@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const db = require("./utils/db.js");
-const authRoute = require("./router/authRoute.js");
+// const authRoute = require("./router/authRoute.js");
 require("dotenv").config();
 
 const app = express();
@@ -27,7 +27,7 @@ if (db) {
 }
 
 // Routes
-app.use("/api/auth", authRoute); // Authentication routes
+// app.use("/api/auth", authRoute); // Authentication routes
 
 app.get("/server", (req, res) => {
   res.status(200).json({ message: "Server is running" });
