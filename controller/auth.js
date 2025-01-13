@@ -1,6 +1,5 @@
 const db = require("../utils/db"); // Database connection
 const jwt = require("jsonwebtoken");
-const secretKey = "your_secret_key"; // Replace with a strong secret key
 
 // User Registration
 exports.register = (req, res) => {

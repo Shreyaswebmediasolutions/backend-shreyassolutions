@@ -1,31 +1,25 @@
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
-const db = require("./utils/db.js"); 
+const db = require("./utils/db.js");
 const authRoute = require("./router/authRoute.js");
-const userRoute = require("./router/userRoute"); // Ensure the file path is correct
-const adminRoute = require("./router/adminRoute"); // Ensure the file path is correct
-require("dotenv").config(); // Loads environment variables from .env file
+require("dotenv").config();
 
 const app = express();
 
-// Middleware
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your frontend URL if needed
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
-    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
-    credentials: true, // Allow cookies and credentials
+    origin: process.env.FRONTEND_URI,
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
   })
 );
 
-// Parses incoming requests with JSON payloads
 app.use(express.json());
 
-// Parses incoming requests with URL-encoded payloads
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// Test database connection (optional)
 if (db) {
   console.log("Database connected successfully!");
 } else {
@@ -34,8 +28,6 @@ if (db) {
 
 // Routes
 app.use("/api/auth", authRoute); // Authentication routes
-app.use("/api/user", userRoute); // User-specific routes
-app.use("/api/admin", adminRoute); // Admin-specific routes
 
 app.get("/server", (req, res) => {
   res.status(200).json({ message: "Server is running" });
